@@ -8,10 +8,14 @@ use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 
+// use Illuminate\Support\Carbon;
+use Carbon\Carbon;
+
 class PostController extends Controller
 {
     public function index()
     {
+        // dd(Carbon::now()->toDateString());
         // $posts = Post::where('title','Test')->get();
         $posts = Post::all(); //to retrieve all records
 

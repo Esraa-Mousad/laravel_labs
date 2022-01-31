@@ -21,7 +21,7 @@
         <h5 class="card-title">Email</h5>
         <p class="card-text">{{ isset($post->user) ? $post->user->email : 'Not Found' }}</p>
         <h5 class="card-title">Created At</h5>
-        <p class="card-text">{{ $post->created_at }}</p>
+        <p class="card-text">{{ $post->created_at ->format('l jS \of F Y h:i:s A') }}</p>
     </div>
 </div>
 @endsection
