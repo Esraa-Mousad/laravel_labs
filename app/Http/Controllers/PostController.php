@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        // $allPosts = Post::where('title','Test')->get();
+        // $posts = Post::where('title','Test')->get();
         $posts = Post::all(); //to retrieve all records
 
         return view('posts.index', [
@@ -37,48 +37,48 @@ class PostController extends Controller
             'title' => $data['title'],
             'description' => $data['description'],
             'user_id' => $data['post_creator'],
-            // will be ignored cause they aren't in fillable
-            // 'un_known_column' => 'ajshdahsouid',
-            // 'id' => 70,
-        ]);// insert into (title,descripotion) values ('asdasd')
-
-        // dd('test'); any logic after dd won't be executed
+        ]);
         //the logic to store post in the db
         return redirect()->route('posts.index');
     }
 
     public function show($postId)
     {
-        //query in db select * from posts where id = $postId
-        // return $postId;
-
-        $posts = Post::all();
+        $post = POST::find($postId);
         return view('posts.show', [
-             'posts' => $posts
+             'post' => $post
         ]);
     }
 
-    public function edit()
+    public function edit($postId)
     {
-        $posts = Post::all();
+        $post = Post::find($postId);
         $users = User::all();
 
         return view('posts.edit', [
-            'posts' => $posts,
+            'post' => $post,
             'users' => $users
             
         ]);
     }
 
-    // public function edit($postId)
-    // {
-    //     // $allPosts = Post::all(); //to retrieve all records
-    //     $post = Post::where('title','first')->get();
+    public function update ($postId)
+    {
+        $data = request()->all();
 
-    //     // $postId=1;
-    //     // return $postId;
-    //     return view('posts.edit', [
-    //         'post' => $post
-    //     ]);
-    // }
+        POST::find($postId)->update([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => $data['post_creator'],
+        ]);
+        return redirect()->route('posts.index');
+    }
+
+    public function destroy($postId)
+    {
+        $post = POST::find($postId);
+        $post -> delete();
+        return redirect()->route('posts.index');
+    }
+
 }
