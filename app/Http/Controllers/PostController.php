@@ -64,13 +64,12 @@ class PostController extends Controller
         return view('posts.edit', [
             'post' => $post,
             'users' => $users
-            
         ]);
     }
 
-    public function update ($postId)
+    public function update ($postId, StorePostRequest $request)
     {
-        $data = request()->all();
+        $data = $request->all();
 
         POST::find($postId)->update([
             'title' => $data['title'],
