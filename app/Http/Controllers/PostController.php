@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         // dd(Carbon::now()->toDateString());
         // $posts = Post::where('title','Test')->get();
-        $posts = Post::all(); //to retrieve all records
+        $posts = Post::paginate(3); //to retrieve all records
 
         return view('posts.index', [
             'posts' => $posts
