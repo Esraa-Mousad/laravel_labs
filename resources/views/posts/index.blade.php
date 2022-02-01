@@ -4,7 +4,7 @@
 
 @section('content')
         <div class="text-center">
-            <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
+            <a href="{{ route('posts.create') }}" class="mt-2 mb-4 btn btn-success">Create Post</a>
         </div>
 
         <table class="table">
@@ -52,10 +52,8 @@
               <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
           </nav> -->
-          
-          <span >
-            {{$posts->links()}}
-          </span>
+
+          <ul class="pagination">{{ $posts->links()}}</ul>
 
           <style>
             .w-5{
