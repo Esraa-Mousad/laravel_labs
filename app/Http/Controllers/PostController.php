@@ -48,13 +48,19 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function show($postId)
+    // public function show($postId)
+    // {
+    //     $post = POST::find($postId);
+    //     return view('posts.show', [
+    //          'post' => $post
+    //     ]);
+    // }
+
+    public function show($slug)
     {
-        $post = POST::find($postId);
-        return view('posts.show', [
-             'post' => $post
-        ]);
-    }
+        $post = Post::where('slug',$slug)->get();
+        return view('posts.show',['post'=>$post]);
+    } 
 
     public function edit($postId)
     {
