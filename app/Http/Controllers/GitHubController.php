@@ -14,16 +14,11 @@ use App\Models\User;
 
 class GitHubController extends Controller
 {
-
- 
-
     public function gitRedirect()
     {
         return Socialite::driver('github')->stateless()->redirect();
     }
        
-
- 
 
     public function gitCallback()
     {
