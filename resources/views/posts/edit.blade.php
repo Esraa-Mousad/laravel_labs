@@ -22,7 +22,7 @@
         <select name="post_creator" class="form-control">
             @foreach ($users as $user)
             @if ($user->id == $post->user_id)
-            <option selected value="{{ isset($post->user) ? $post->user->id : '1' }}">{{$user->name}}</option>
+            <option selected value="{{$user->id}}">{{$user->name}}</option>
             @else
             <option value="{{$user->id}}">{{$user->name}}</option>
             @endif

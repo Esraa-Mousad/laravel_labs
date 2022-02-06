@@ -16,7 +16,7 @@ class GitHubController extends Controller
 {
     public function gitRedirect()
     {
-        return Socialite::driver('github')->stateless()->redirect();
+        return Socialite::driver('github')->redirect();
     }
        
 
@@ -36,13 +36,17 @@ class GitHubController extends Controller
       
             }else{
                 $gitUser = User::create([
-                    'name' => $user->name,
+                    'name' => $user->nickname,
                     'email' => $user->email,
                     'github_id'=> $user->id,
                     'auth_type'=> 'github',
                     'password' => encrypt('gitpwd059')
+                    // 'password' => $user->token
+
                 ]);
      
+                // dd($user);
+
                 Auth::login($gitUser);
       
                 return redirect('/posts');

@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         // dd(Carbon::now()->toDateString());
         // $posts = Post::where('title','Test')->get();
-        $posts = Post::simplePaginate(3); //to retrieve all records
+        $posts = Post::with('user')->paginate(10); //to retrieve all records
 
         return view('posts.index', [
             'posts' => $posts
@@ -75,7 +75,8 @@ class PostController extends Controller
 
     public function update ($postId, StorePostRequest $request)
     {
-        $data = $request->all();
+        $data = $request->only('title', 'description', 'post_creator');
+        // $data = $request->all();
 
         POST::find($postId)->update([
             'title' => $data['title'],

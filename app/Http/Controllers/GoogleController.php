@@ -54,7 +54,7 @@ class GoogleController extends Controller
 
  try {
 
-    $user = Socialite::driver('google')->user();
+    $user = Socialite::driver('google')->stateless()->user();
     $finduser = User::where('google_id', $user->id)->first();
 
     if($finduser){
@@ -69,8 +69,11 @@ class GoogleController extends Controller
         'email' => $user->email,
         'google_id'=> $user->id,
         'password' => encrypt('123456dummy')
+        // 'password' => $user->token
 
     ]);
+
+    // dd($user);
 
     Auth::login($newUser);
     return redirect()->intended('/posts');
